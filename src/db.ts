@@ -34,6 +34,10 @@ export class Database {
     });
   }
 
+  async disconnect(): Promise<void> {
+    return this.db.destroy();
+  }
+
   async getLatestAppUpdate(): Promise<DbAppUpdate | undefined> {
     return this.db<DbAppUpdate>(Table.AppUpdate).orderBy('release_date', 'desc').first();
   }

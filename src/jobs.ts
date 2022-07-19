@@ -3,10 +3,9 @@ import fetch from 'node-fetch';
 import { Database } from './db';
 import { AppUpdate, DiscordMessage } from './models';
 
-export async function checkNewApps() {
+export async function checkNewApps(db: Database) {
   console.log('Checking for new apps');
 
-  const db = new Database();
   const latest = await db.getLatestAppUpdate();
 
   const afterDate = latest?.release_date ?? sub(new Date(), { weeks: 1 }).valueOf();
